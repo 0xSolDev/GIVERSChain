@@ -1,7 +1,5 @@
 {
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.2.2",
-    "ethereum-waffle": "^3.4.4",
     "hardhat": "^2.9.6"
   },
   "name": "giverschain",
