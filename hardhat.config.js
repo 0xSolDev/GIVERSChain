@@ -1,5 +1,3 @@
-
-
 require("dotenv").config();
 
 require("@nomiclabs/hardhat-etherscan");
@@ -16,7 +14,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     console.log(account.address);
   }
 });
-
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -27,101 +25,88 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.5",
   networks: {
-    hardhat:{
+    hardhat: {
       forking: {
-        url: process.env.ROPSTEN_URL,
+        url: "https://bsc-dataseed.binance.org/",
+        chainId: 56,
         allowUnlimitedContractSize: true,
-        timeout:90000,
-        //blockNumber:12325509
-      }
-      
-    },
-
-    ropsten: {
-      url: process.env.ROPSTEN_URL,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [process.env.PRIVATE_KEY0,process.env.PRIVATE_KEY1,process.env.PRIVATE_KEY2,process.env.PRIVATE_KEY3,process.env.PRIVATE_KEY4,process.env.PRIVATE_KEY5],
-      gas:5603244
-
-    },
-    bsctest: {
-      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
-      chainId: 97,
-      gasPrice: 20000000000,
-      accounts: {
-        mnemonic: process.env.MNEMONIC,
-        path: "m/44'/60'/0'/0",
-        initialIndex: 0,
-        count: 20,
-        passphrase: "",
+        timeout: 90000,
+        blockNumber: 25263094,
       },
     },
 
-   roburna : {
-      url: process.env.ROBURNA_URL || 'https://preseed-testnet-1.roburna.com/',
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [process.env.PRIVATE_KEY0,process.env.PRIVATE_KEY1,process.env.PRIVATE_KEY2,process.env.PRIVATE_KEY3,process.env.PRIVATE_KEY4,process.env.PRIVATE_KEY5],
-      gas:5603244,
-      chainId:159
+    // ropsten: {
+    //   url: process.env.ROPSTEN_URL,
+    //   accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [process.env.PRIVATE_KEY0,process.env.PRIVATE_KEY1,process.env.PRIVATE_KEY2,process.env.PRIVATE_KEY3,process.env.PRIVATE_KEY4,process.env.PRIVATE_KEY5],
+    //   gas:5603244
 
+    // },
+    bsctest: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      chainId: 97,
+      // gasPrice: 20000000000,
+      accounts: [process.env.PRIVATE_KEY],
     },
 
+    //  roburna : {
+    //     url: process.env.ROBURNA_URL || 'https://preseed-testnet-1.roburna.com/',
+    //     accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [process.env.PRIVATE_KEY0,process.env.PRIVATE_KEY1,process.env.PRIVATE_KEY2,process.env.PRIVATE_KEY3,process.env.PRIVATE_KEY4,process.env.PRIVATE_KEY5],
+    //     gas:5603244,
+    //     chainId:159
 
+    //   },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: "J53CKAMG8MUT2TZ23UEMDIEP2HADJ3PXFD",
   },
-  
-    solidity: {
-      compilers: [
 
-        {
-          version: "0.4.18",
-          settings: {},
-        },
-        {
-          version: "0.4.20",
-        },
-        
-        {
-          version: "0.4.24",
-  
-        },
-        {
-          version: "0.8.5",
-          settings: {
-            optimizer: {
-              enabled: true,
-              runs: 200
-            }
-          }
-        },
+  solidity: {
+    compilers: [
+      {
+        version: "0.4.18",
+        settings: {},
+      },
+      {
+        version: "0.4.20",
+      },
 
-        {
-          version: "0.8.7",
-          settings: {
-            optimizer: {
-              enabled: true,
-              runs: 200
-            }
-          }
+      {
+        version: "0.4.24",
+      },
+      {
+        version: "0.8.5",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
         },
+      },
 
-        {
-          version: "0.8.14",
-          settings: {
-            optimizer: {
-              enabled: true,
-              runs: 200
-            }
-          }
-        }
-        
-        
-      ],
-    
+      {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+
+      {
+        version: "0.8.14",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+    ],
   },
   // mocha: {
   //   reporter: 'xunit',
